@@ -30,6 +30,7 @@ setup(
         "openai==1.44.0",
         "scikit-learn==1.5.1",
         "pydantic-settings==2.4.0",
+        "pydantic==2.9.0"
     ],
     package_data={'semtest': ['py.typed']},
 )

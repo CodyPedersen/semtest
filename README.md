@@ -15,7 +15,7 @@ SemTest at maturity will contain a few necessary stages:
 
 ## Proposed Test Case Schema
 @semtest.benchmark
-    - expected inputs/outputs
-    - iterations
-    - validation_types [semantic distance, exact, schema]
-    - schema validation [optional]
+- expected inputs/outputs
+- iterations
+- validation_types [semantic distance, exact, schema]
+- schema validation [optional]
