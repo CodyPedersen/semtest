@@ -26,6 +26,10 @@ setup(
     ],
     python_requires='>=3.12',
     readme="README.md",
-    install_requires=[],
+    install_requires=[
+        "openai==1.44.0",
+        "scikit-learn==1.5.1",
+        "pydantic-settings==2.4.0",
+    ],
     package_data={'semtest': ['py.typed']},
 )

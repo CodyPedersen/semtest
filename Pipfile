@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[requires]
+python_version = "3.12"
+
+[packages]
+openai = "==1.44.0"
+scikit-learn = "==1.5.1"
+pydantic-settings = "==2.4.0"
+
+[dev-packages]
+pylint = "==3.2.7"
+ipykernel= "==6.29.5"
+mypy = "==1.11.2"
