@@ -10,8 +10,10 @@ python_version = "3.12"
 openai = "==1.44.0"
 scikit-learn = "==1.5.1"
 pydantic-settings = "==2.4.0"
+pydantic = "==2.9.0"
 
 [dev-packages]
-pylint = "==3.2.7"
+pydantic = {version = "2.9.0", extras = ["mypy"]}
 ipykernel= "==6.29.5"
-mypy = "==1.11.2"
+pylint = "*"
+mypy = "*"
