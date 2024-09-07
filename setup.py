@@ -1,4 +1,5 @@
 """PyPi vizrecurse setup"""
+# pylint: disable=import-error
 from pathlib import Path
 
 from setuptools import setup, find_packages
