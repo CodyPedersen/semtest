@@ -2,6 +2,8 @@
 
 from typing import TypeVar
 
+import numpy as np
+
 from .comparators import ComparatorBase
 
 T = TypeVar("T", bound=ComparatorBase)
@@ -15,7 +17,7 @@ class SemanticComparator:
 
     def similarity(
         self, embedding_a: list[float], embedding_b: list[float]
-    ) -> float:
+    ) -> np.float64:
         """Calculate similarity between two embeddings"""
 
         return self.comparator.calculate_distance(embedding_a, embedding_b)
