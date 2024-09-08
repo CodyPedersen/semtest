@@ -3,7 +3,7 @@ Enables semantic testing of LLM responses and benchmarking against result expect
 
 
 ## Current functionality
-SemTest at maturity will contain a few necessary stages:
+semtest supports the semantic benchmarking process through the following:
 
 1. Embedding vector generation against expected result set for a given input -> output expectation
 2. Execution of inputs against a given model
@@ -11,9 +11,9 @@ SemTest at maturity will contain a few necessary stages:
 4. Analysis of embedding vector difference of the LLM response and the expectation
 
 
-## How to
+## Benchmarking in direct (non-framework) mode
 
-semtest current supports benchmarking in non-framework mode. An example of this can be found in `examples/benchmarking_example.ipynb`.
+Full example of this can be found in `examples/benchmarking_example.ipynb`.
 
 To utilize this benchmarking, the `@semtest.benchmark` decorator can be used manually to execute a given function and obtain a series of results and distances from expected semantics.
 
