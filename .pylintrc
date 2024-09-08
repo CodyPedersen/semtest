@@ -89,7 +89,7 @@ persistent=yes
 
 # Resolve imports to .pyi stubs if available. May reduce no-member messages and
 # increase not-an-iterable messages.
-prefer-stubs=no
+#prefer-stubs=no
 
 # Minimum Python version to use for version dependent checks. Will default to
 # the version used to run pylint.
@@ -478,7 +478,7 @@ never-returning-functions=sys.exit,argparse.parse_error
 # Let 'consider-using-join' be raised when the separator to join on would be
 # non-empty (resulting in expected fixes of the type: ``"- " + " -
 # ".join(items)``)
-suggest-join-with-non-empty-separator=yes
+#suggest-join-with-non-empty-separator=yes
 
 
 [REPORTS]

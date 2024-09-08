@@ -1,4 +1,4 @@
-"""module entrypoint for trival execution"""
+"""module entrypoint for trivial execution"""
 
 from .semtest import semantic_test_runner
 
