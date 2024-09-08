@@ -1,7 +1,7 @@
 """Core OpenAI client for LLM interactions"""
-import openai
-
 from typing import Optional
+
+import openai
 
 from semtest.config import settings
 
