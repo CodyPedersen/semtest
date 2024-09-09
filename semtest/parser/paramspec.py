@@ -2,7 +2,7 @@
 from typing import Any, Optional, Callable
 from pydantic import BaseModel
 
-from .input_type import InputType
+from .input_type import InputType, Verbosity
 
 
 class SemtestParamSpec(BaseModel):
@@ -20,5 +20,11 @@ semtest_params = [
         type=InputType.directory,
         default=".",
         help="Input directory of semtests to execute against."
+    ),
+    SemtestParamSpec(
+        flag="--verbosity",
+        type=InputType.verbosity,
+        default="warn",
+        help=f"Verbosity level: {Verbosity.__members__.values()}"
     )
 ]

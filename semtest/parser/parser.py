@@ -5,11 +5,13 @@ from pathlib import Path
 from pydantic import BaseModel
 
 from .paramspec import semtest_params
+from .input_type import Verbosity
 
 
 class SemtestContext(BaseModel):
     """Listing of all permissible arguments"""
     directory: Path
+    verbosity: Verbosity
 
 
 class Parser:
