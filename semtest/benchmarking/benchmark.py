@@ -110,8 +110,6 @@ class Benchmark:
         return json.dumps(self.benchmarks(), indent=indent)
 
 
-
-
 def benchmark(
     semantic_expectation: str,
     iterations: int = 1,
