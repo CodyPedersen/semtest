@@ -77,7 +77,7 @@ Framework mode requires:
 - A test directory with .py files containing your semtest.benchmark definitions
 - Each benchmark should return the llm response string you want to gauge (or a modified version of it)
 
-See `example_benchmarks` directory for an example on structuring your semantic benchmarks
+See `example_benchmarks` directory for an example on structuring your semantic benchmarks. Runnable with `semtest example_benchmarks`
 
 Caveats: 
 - Framework mode does not currenty support fixtures
