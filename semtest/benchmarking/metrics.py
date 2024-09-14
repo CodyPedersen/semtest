@@ -1,11 +1,15 @@
 """Benchmark metrics and metadata classes"""
 import numpy as np
-from pydantic import BaseModel, computed_field
+from pydantic import BaseModel, Field, computed_field
 
 
 class SemanticMetrics(BaseModel):
     """Semantic benchmark metric aggregator"""
     responses: list[str]
+    exceptions: list[Exception]
+    result_embeddings: list[list[float]] = Field(
+        ..., exclude=True
+    )
     semantic_distances: list[np.float64]
 
     class Config:
@@ -26,7 +30,7 @@ class SemanticMetrics(BaseModel):
 
 
 class BenchmarkMetadata(BaseModel):
-    """Core metrics class"""
+    """Core benchmark metadata/metrics class"""
     func: str
     iterations: int
     comparator: str

@@ -1,4 +1,6 @@
 """Core configuration ingestion"""
+import logging
+import sys
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
@@ -12,5 +14,18 @@ class Settings(BaseSettings):
         """Ingestion configurations"""
         env_file = '.env'
         env_file_encoding = 'utf-8'
+
+
+def configure_cli_logging() -> None:
+    """Configure CLI logging"""
+    logger = logging.getLogger("semtest")
+    logger.setLevel(logging.DEBUG)
+
+    console_handler = logging.StreamHandler(sys.stdout)
+
+    formatter = logging.Formatter('%(message)s')
+    console_handler.setFormatter(formatter)
+
+    logger.addHandler(console_handler)
 
 settings = Settings()

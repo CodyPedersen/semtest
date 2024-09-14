@@ -66,9 +66,25 @@ Output
 
 ```
 
+## Benchmarking in framework mode
+Framework mode allows you to execute a series of prepared tests from a directory, similar to other testing frameworks (pyest, etc). Framework mode follows the same rules as direct execution mode as above, but with a few modifications, as the engine executes your tests (you do not call the benchmarks directly)
+
+Running in framework mode is done with the following command: `semtest <your_directory>`
+
+Due to it's automated nature, outputs are currently standardize to CLI where a dataframe is generated and output to the CLI. Additional options for data retrieval will be added later.
+
+Framework mode requires:
+- A test directory with .py files containing your semtest.benchmark definitions
+- Each benchmark should return the llm response string you want to gauge (or a modified version of it)
+
+See `example_benchmarks` directory for an example on structuring your semantic benchmarks
+
+Caveats: 
+- Framework mode does not currenty support fixtures
+- No relative imports within test directories due to treating every file as a top-level module
+
 ## Ongoing features
-- Implement framework mode (automatically execute all defined semtest.benchmark definitions and display results)
-    - `semtest {directory}`
 - Allow for parameterization of benchmarks with multiple I/O expectations
+- Schema 
 - Enable graceful test-case failures
 - Implement LLM response schema validation via Pydantic (if applicable)

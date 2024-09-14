@@ -1,4 +1,5 @@
 """Core benchmarking functionality"""
+# pylint: disable=broad-exception-caught
 import logging
 from functools import cached_property, wraps
 from typing import Any, Callable
@@ -12,6 +13,8 @@ from semtest.semantic_comparator import (
 from semtest.llm_client import EmbeddingClient
 
 from .metrics import BenchmarkMetadata, SemanticMetrics
+
+logger = logging.getLogger("semtest")
 
 
 class BenchmarkRunner:
@@ -41,20 +44,26 @@ class BenchmarkRunner:
 
         self.result_set: list[str] = []
         self.result_embeddings: list[list[float]] = []
+        self.exceptions: list[Exception] = []
 
-    def run(self, *args: Any, **kwargs: Any) -> "BenchmarkRunner":
+    def run(self, *args: Any, **kwargs: Any) -> BenchmarkMetadata:
         """Execute benchmark and generate response embeddings"""
-        info = f"Executing {self.func.__name__}, n={self.iterations} iterations"
-        logging.info(info)
+
+        info = f"Executing {self.func.__name__}, n={self.iterations} iterations\n"
+        logger.info(info)
 
         for _ in range(self.iterations):
-            # TODO: Implement failure catching for test cases
-            res = self.func(*args, **kwargs)
-            self.result_set.append(res)
+            try:
+                res = self.func(*args, **kwargs)
+                self.result_set.append(res)
+            except Exception as e:
+                exception_msg = f"Exception encountered \n {e!r}\n"
+                logger.exception(exception_msg)
+                self.exceptions.append(e)
 
         self._generate_result_embeddings()
 
-        return self
+        return self.metrics
 
     @cached_property
     def metrics(self) -> BenchmarkMetadata:
@@ -67,19 +76,11 @@ class BenchmarkRunner:
            expectation_input=self.semantic_expectation,
            benchmarks=SemanticMetrics(
                responses=self.result_set,
+               exceptions=self.exceptions,
+               result_embeddings=self.result_embeddings,
                semantic_distances=self._calculate_semantic_distances()
            )
         )
-
-    @property
-    def metrics_dict(self) -> dict[str, Any]:
-        """Dump LLM similarity metrics to dictionary"""
-        return self.metrics.model_dump()
-
-    @property
-    def metrics_json(self) -> str:
-        """Dump LLM similarity benchmarks to json format"""
-        return self.metrics.model_dump_json(indent=2)
 
     def _generate_result_embeddings(self) -> list[list[float]]:
         """From a set of LLM responses, generate result embeddings"""
@@ -107,10 +108,10 @@ def benchmark(
     iterations: int = 1,
     comparator: ComparatorBase = CosineSimilarity(),
     embedding_client: EmbeddingClient = EmbeddingClient()
-) -> Callable[[Callable[..., Any]], Callable[..., BenchmarkRunner]]:
+) -> Callable[[Callable[..., Any]], Callable[..., BenchmarkMetadata]]:
     """Generate and execute a benchmark client test"""
 
-    def decorator(func: Callable[..., Any]) -> Callable[..., BenchmarkRunner]:
+    def decorator(func: Callable[..., Any]) -> Callable[..., BenchmarkMetadata]:
         benchmark_runner = BenchmarkRunner(
             func=func,
             semantic_expectation=semantic_expectation,
@@ -120,8 +121,10 @@ def benchmark(
         )
 
         @wraps(func)
-        def inner(*args: Any, **kwargs: Any) -> BenchmarkRunner:
+        def inner(*args: Any, **kwargs: Any) -> BenchmarkMetadata:
             return benchmark_runner.run(*args, **kwargs)
+
+        setattr(inner, "_benchmark", True)  # Mark function as a benchmark
 
         return inner
     return decorator

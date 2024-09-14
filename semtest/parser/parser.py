@@ -8,6 +8,7 @@ from .paramspec import semtest_params
 from .input_type import Verbosity
 
 
+# TODO: Move to custom
 class SemtestContext(BaseModel):
     """Listing of all permissible arguments"""
     directory: Path
