@@ -1,6 +1,5 @@
 """Tools required to build a report from benchmark results"""
 from typing import Any, Optional
-import numpy as np
 import pandas as pd
 import tabulate
 
