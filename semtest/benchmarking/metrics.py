@@ -15,6 +15,9 @@ class SemanticMetrics(BaseModel):
     class Config:
         """Semantic metrics configurations"""
         arbitrary_types_allowed = True
+        json_encoders = {
+            list[Exception]: lambda excs: [type(exc).__name__ for exc in excs]
+        }
 
     @computed_field
     @property

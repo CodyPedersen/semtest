@@ -1,11 +1,12 @@
 """Tools required to build a report from benchmark results"""
+import logging
 from typing import Any, Optional
 import pandas as pd
 import tabulate
 
 from semtest.benchmarking.metrics import BenchmarkMetadata
 
-
+logger = logging.getLogger("semtest")
 class BenchmarkReport:
     """Convert a series of benchmarks into readable output"""
     # TODO: Buld out output option configurations
@@ -24,6 +25,11 @@ class BenchmarkReport:
         """Build BenchmarkMetadata objects into a standard report"""
 
         report_df = pd.DataFrame(self._build_row_dicts())
+
+        fmt_token = "="
+        report_header = f"{fmt_token*30} Benchmarking Results {fmt_token*30}\n"
+        logger.info(report_header)
+
         print(tabulate.tabulate(report_df, headers='keys', tablefmt='fancy_grid'))
 
 

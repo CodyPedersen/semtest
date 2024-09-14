@@ -48,8 +48,12 @@ class BenchmarkRunner:
 
     def run(self, *args: Any, **kwargs: Any) -> BenchmarkMetadata:
         """Execute benchmark and generate response embeddings"""
-
-        info = f"Executing {self.func.__name__}, n={self.iterations} iterations\n"
+        fmt_token = '='
+        info = (
+            f"{fmt_token*35} "
+            f"{self.func.__name__} (n={self.iterations} iterations) "
+            f"{fmt_token*35}\n"
+        )
         logger.info(info)
 
         for _ in range(self.iterations):
@@ -57,8 +61,10 @@ class BenchmarkRunner:
                 res = self.func(*args, **kwargs)
                 self.result_set.append(res)
             except Exception as e:
-                exception_msg = f"Exception encountered \n {e!r}\n"
+                logger.info("Exception captured\n")
+                exception_msg = f"{e!r}\n"
                 logger.exception(exception_msg)
+                logger.info("\n")
                 self.exceptions.append(e)
 
         self._generate_result_embeddings()

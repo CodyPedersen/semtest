@@ -2,13 +2,22 @@
 Enables semantic testing of LLM responses and benchmarking against result expectations.
 
 
-## Current functionality
+## Functionality
 semtest supports the semantic benchmarking process through the following:
 
 1. Embedding vector generation against expected result set for a given input -> output expectation
 2. Execution of inputs against a given model
 3. Collection of llm responses for the given input
 4. Analysis of embedding vector difference of the LLM response and the expectation
+
+
+## Core Requirements
+Executing benchmarks requires OpenAI configuration variables defined in a .env file in order to generate required embeddings
+- `OPENAI_API_KEY="..."`
+- `BASE_URL="https://api.openai.com/v1"`
+- `DEFAULT_EMBEDDING_MODEL="text-embedding-3-large"`
+
+The latter two are defaulted to the values specified above.
 
 
 ## Benchmarking in direct (non-framework) mode
@@ -44,23 +53,24 @@ print(res.benchmarks())
 Output
 ```json
 {
-  "func": "mock_prompt_benchmark",
+  "func": "mock_prompt_benchmark_prompt_2",
   "iterations": 3,
   "comparator": "cosine_similarity",
-  "expectation_str": "A dog is in the background of the photograph",
+  "expectation_input": "A dog is in the background of the photograph",
   "benchmarks": {
     "responses": [
-      "There's a dog in the background of the photo",
-      "In the background of the photo is a dog",
-      "There's an animal in the background of the photo and it's a dog."
+      "In the background of the photograph there is a furry animal",
+      "In the foreground there is a human, and I see a dog in the background of the photograph",
+      "There are two dogs in the background of the image"
     ],
+    "exceptions": [],
     "semantic_distances": [
-      0.8689512451809671,
-      0.8314281742105534,
-      0.7698003396849378
+      0.7213289868782804,
+      0.7029974291193597,
+      0.7529891407174136
     ],
-    "mean_semantic_distance": 0.8233932530254862,
-    "median_semantic_distance": 0.8314281742105534
+    "mean_semantic_distance": 0.7257718522383513,
+    "median_semantic_distance": 0.7213289868782804
   }
 }
 
@@ -73,18 +83,28 @@ Running in framework mode is done with the following command: `semtest <your_dir
 
 Due to it's automated nature, outputs are currently standardize to CLI where a dataframe is generated and output to the CLI. Additional options for data retrieval will be added later.
 
-Framework mode requires:
+__Framework mode requires:__
 - A test directory with .py files containing your semtest.benchmark definitions
 - Each benchmark should return the llm response string you want to gauge (or a modified version of it)
 
-See `example_benchmarks` directory for an example on structuring your semantic benchmarks. Runnable with `semtest example_benchmarks`
+See `example_benchmarks` directory for an example on structuring your semantic benchmarks. Example is runnable with `semtest example_benchmarks`.
+
+__Benchmark report:__
+![Benchmark Report](./assets/framework_output.png)
+
+More granular benchmark-level output details are available within the CLI interface.
 
 Caveats: 
 - Framework mode does not currenty support fixtures
 - No relative imports within test directories due to treating every file as a top-level module
 
+
+
+
+
 ## Ongoing features
+- Fixture support for framework mode
+- Support for Azure OpenAI embeddings
+- Support for multiple result output formats (non-CLI)
 - Allow for parameterization of benchmarks with multiple I/O expectations
-- Schema 
-- Enable graceful test-case failures
-- Implement LLM response schema validation via Pydantic (if applicable)
+- Implement LLM response schema validation via Pydantic
