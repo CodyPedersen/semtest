@@ -1,4 +1,5 @@
 """Semantic testing benchmarking module"""
-from .benchmark import Benchmark, benchmark
+from .benchmark import BenchmarkRunner, benchmark
+from .metrics import BenchmarkMetadata
 
-__all__ = ["Benchmark", "benchmark"]
+__all__ = ["BenchmarkMetadata", "BenchmarkRunner", "benchmark"]

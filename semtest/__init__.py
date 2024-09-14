@@ -1,14 +1,14 @@
 """Core imports for semtest library functionality"""
-from .benchmarking import Benchmark, benchmark
+from .benchmarking import BenchmarkMetadata, BenchmarkRunner, benchmark
 from .llm_client import EmbeddingClient
-from .semantic_comparator import SemanticComparator, CosineSimilarity
+from .semantic_comparator import CosineSimilarity
 from .semtest import semantic_test_runner
 
 __all__ = [
-    "Benchmark",
+    "BenchmarkMetadata",
+    "BenchmarkRunner",
     "EmbeddingClient",
     "CosineSimilarity",
-    "SemanticComparator",
-    "benchmarking",
+    "benchmark",
     "semantic_test_runner"
 ]
