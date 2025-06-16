@@ -31,7 +31,6 @@ class BenchmarkRunner:
     comparator: ComparatorBase
     embedding_client: EmbeddingClient = Field(default_factory=EmbeddingClient)
 
-
     def __post_init__(self) -> None:
         self.embedding_expectation = (
             self.embedding_client.generate_embedding_vector(
