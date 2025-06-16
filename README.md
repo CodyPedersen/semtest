@@ -103,8 +103,8 @@ __Caveats:__
 
 
 ## Ongoing features
+- Implement llm response schema validation via Pydantic
+    - Comparators must be fully generic & non-coupled to embeddings (Embedding Comparator, Schema Comparator, Data match comparator (structured kv)
 - Fixture support for framework mode
-- Support for Azure OpenAI embeddings
 - Support for multiple result output formats (non-CLI)
 - Allow for parameterization of benchmarks with multiple I/O expectations
-- Implement llm response schema validation via Pydantic
