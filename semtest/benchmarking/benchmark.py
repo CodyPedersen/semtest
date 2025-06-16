@@ -10,7 +10,7 @@ from semtest.semantic_comparator import (
     ComparatorBase,
     CosineSimilarity,
 )
-from semtest.llm_client import EmbeddingClient
+from semtest.embeddings import EmbeddingClient
 
 from .metrics import BenchmarkMetadata, SemanticMetrics
 

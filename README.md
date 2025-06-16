@@ -1,6 +1,9 @@
 # semtest
+
 Enables semantic testing of LLM responses and benchmarking against result expectations.
 
+## PyPi
+Install the latest version of semtest [here](https://pypi.org/project/semtest/)
 
 ## Functionality
 semtest supports the semantic benchmarking process through the following:
@@ -8,7 +11,7 @@ semtest supports the semantic benchmarking process through the following:
 1. Embedding vector generation against expected result set for a given input -> output expectation
 2. Execution of inputs against a given model
 3. Collection of llm responses for the given input
-4. Analysis of embedding vector difference of the LLM response and the expectation
+4. Analysis of embedding vector difference of the llm response and the expectation
 
 
 ## Core Requirements
@@ -77,29 +80,26 @@ Output
 ```
 
 ## Benchmarking in framework mode
-Framework mode allows you to execute a series of prepared tests from a directory, similar to other testing frameworks (pyest, etc). Framework mode follows the same rules as direct execution mode as above, but with a few modifications, as the engine executes your tests (you do not call the benchmarks directly)
+Framework mode allows you to execute a series of prepared tests from a directory, similar to other testing frameworks (pytest, etc). Framework mode follows the same rules as direct execution mode as above, but with a few modifications, as the engine executes your tests (you do not call the benchmarks directly).
 
-Running in framework mode is done with the following command: `semtest <your_directory>`
+Running in framework mode is done with the following command: `semtest <your_directory>`.
 
-Due to it's automated nature, outputs are currently standardize to CLI where a dataframe is generated and output to the CLI. Additional options for data retrieval will be added later.
+Due to it's automated nature, outputs are currently generated as a dataframe and output to the CLI. Additional options for data retrieval will be added later.
 
 __Framework mode requires:__
 - A test directory with .py files containing your semtest.benchmark definitions
-- Each benchmark should return the llm response string you want to gauge (or a modified version of it)
+- Each benchmark should return the llm response string you want to gauge (or a modified/parsed version of it)
 
 See `example_benchmarks` directory for an example on structuring your semantic benchmarks. Example is runnable with `semtest example_benchmarks`.
 
 __Benchmark report:__
-![Benchmark Report](./assets/framework_output.png)
+![Benchmark Report](https://raw.githubusercontent.com/CodyPedersen/semtest/main/assets/framework_output.png)
 
 More granular benchmark-level output details are available within the CLI interface.
 
-Caveats: 
+__Caveats:__ 
 - Framework mode does not currenty support fixtures
 - No relative imports within test directories due to treating every file as a top-level module
-
-
-
 
 
 ## Ongoing features
@@ -107,4 +107,4 @@ Caveats:
 - Support for Azure OpenAI embeddings
 - Support for multiple result output formats (non-CLI)
 - Allow for parameterization of benchmarks with multiple I/O expectations
-- Implement LLM response schema validation via Pydantic
+- Implement llm response schema validation via Pydantic

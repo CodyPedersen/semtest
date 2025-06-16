@@ -1,12 +1,16 @@
 """Engine specification - see Engine class"""
 import logging
 
+from pydantic.dataclasses import dataclass
+
 from semtest.benchmarking import BenchmarkMetadata
 from semtest.reporting import BenchmarkReport
 from semtest.loader import Loader
 from semtest.parser import SemtestContext
 
 logger = logging.getLogger("semtest")
+
+@dataclass
 class Engine:
     """
     Core engine for semtest framework mode. Using a settings
@@ -14,16 +18,10 @@ class Engine:
     process of loading tests, executing tests, and building 
     the final output object for the user.
     """
-
-    def __init__(
-        self,
-        context: SemtestContext,
-        loader: Loader,
-        reporter: BenchmarkReport
-    ) -> None:
-        self.context = context
-        self.loader = loader
-        self.reporter = reporter
+    
+    context: SemtestContext
+    loader: Loader
+    reporter: BenchmarkReport
 
     def execute(self) -> list[BenchmarkMetadata]:
         """Load all tests, execute them and provide results"""

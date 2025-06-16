@@ -2,12 +2,21 @@
 import os
 import sys
 
+from collections.abc import Iterator
 from typing import Callable
 from importlib import import_module
 from pathlib import Path
 
 from semtest.benchmarking import BenchmarkMetadata
 from semtest.parser import SemtestContext
+
+from contextlib import contextmanager
+
+@contextmanager
+def inject_test_path(tests_directory: Path) -> Iterator[None]:
+    sys.path.insert(0, str(tests_directory))
+    yield
+    sys.path.pop(0)
 
 
 class Loader:
@@ -23,22 +32,19 @@ class Loader:
             1. No relative imports
             2. Files/modules must be uniquely named
         """
-        sys.path.insert(0, str(self.tests_directory))
+        with inject_test_path(self.tests_directory):
+            modules = []
 
-        modules = []
+            for file in self.tests_directory.rglob('*.py'):
+                module = import_module(self._get_module_name(file))
+                modules.append(module)
 
-        for file in self.tests_directory.rglob('*.py'):
-            module = import_module(self._get_module_name(file))
-            modules.append(module)
-
-        benchmark_functions = []
-        for module in modules:
-            for attr_name in dir(module):
-                attr = getattr(module, attr_name)
-                if callable(attr) and hasattr(attr, '_benchmark'):
-                    benchmark_functions.append(attr)
-
-        sys.path.pop(0)
+            benchmark_functions = []
+            for module in modules:
+                for attr_name in dir(module):
+                    attr = getattr(module, attr_name)
+                    if callable(attr) and hasattr(attr, '_benchmark'):
+                        benchmark_functions.append(attr)
 
         return benchmark_functions
 

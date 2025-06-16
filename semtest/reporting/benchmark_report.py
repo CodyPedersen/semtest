@@ -1,21 +1,22 @@
 """Tools required to build a report from benchmark results"""
 import logging
-from typing import Any, Optional
+from typing import Any
 import pandas as pd
 import tabulate
+from pydantic import Field
+from pydantic.dataclasses import dataclass
 
 from semtest.benchmarking.metrics import BenchmarkMetadata
 
 logger = logging.getLogger("semtest")
+
+
+@dataclass
 class BenchmarkReport:
     """Convert a series of benchmarks into readable output"""
     # TODO: Buld out output option configurations
-
-    def __init__(
-        self,
-        benchmarks: Optional[list[BenchmarkMetadata]] = None
-    ) -> None:
-        self.benchmarks: list[BenchmarkMetadata] = benchmarks or []
+    
+    benchmarks: list[BenchmarkMetadata] = Field(default_factory=list)
 
     def populate(self, benchmarks: list[BenchmarkMetadata]) -> None:
         """Populate reporter with data"""
@@ -33,7 +34,7 @@ class BenchmarkReport:
         print(tabulate.tabulate(report_df, headers='keys', tablefmt='fancy_grid'))
 
 
-    def _build_row_dicts(self) -> list[dict[str,Any]]:
+    def _build_row_dicts(self) -> list[dict[str, Any]]:
         """Generate row dicts from benchmark metadata"""
         row_dicts = []
 
