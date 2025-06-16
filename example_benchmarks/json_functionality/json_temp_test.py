@@ -24,7 +24,7 @@ Round 2
 """
 
 
-def chat_completion_variable_temp(temp: float, test_dataset: str) -> str:
+def chat_completion_variable_temp(temp: float, test_dataset: str) -> str | None:
     """Generate a chat completion"""
     client = OpenAI()
     llm_response = client.chat.completions.create(
@@ -61,6 +61,8 @@ def chat_completion_variable_temp(temp: float, test_dataset: str) -> str:
 
     response_text = llm_response.choices[0].message.content
 
+    assert response_text is not None
+
     start = "```json"
     li = str.find(response_text, start) + len(start)
     ri = str.rfind(response_text, "```")
@@ -72,7 +74,7 @@ def chat_completion_variable_temp(temp: float, test_dataset: str) -> str:
     semantic_expectation=EXPECTATION,
     iterations=2
 )
-def mock_test_json_temp_1() -> str:
+def mock_test_json_temp_1() -> str | None:
     """A better prompt/temperature/config"""
     return chat_completion_variable_temp(temp=.7, test_dataset=TEST_DATASET)
 
@@ -81,6 +83,6 @@ def mock_test_json_temp_1() -> str:
     semantic_expectation=EXPECTATION,
     iterations=2
 )
-def mock_test_json_temp_2() -> str:
+def mock_test_json_temp_2() -> str | None:
     """A better prompt/temperature/config"""
     return chat_completion_variable_temp(temp=0.0, test_dataset=TEST_DATASET)

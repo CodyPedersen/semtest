@@ -18,7 +18,7 @@ class Engine:
     process of loading tests, executing tests, and building 
     the final output object for the user.
     """
-    
+
     context: SemtestContext
     loader: Loader
     reporter: BenchmarkReport

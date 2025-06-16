@@ -19,7 +19,7 @@ TEST_DATASET = {
     semantic_expectation=EXPECTATION,
     iterations=2
 )
-def mock_prompt_1() -> str:
+def mock_prompt_1() -> str | None:
     """A better prompt/temperature/config"""
 
     client = OpenAI()
@@ -54,7 +54,7 @@ def mock_prompt_1() -> str:
     semantic_expectation=EXPECTATION,
     iterations=2
 )
-def mock_prompt_2() -> str:
+def mock_prompt_2() -> str | None:
     """A slightly worse prompt/temperature/config"""
 
     client = OpenAI()

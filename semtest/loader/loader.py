@@ -2,6 +2,7 @@
 import os
 import sys
 
+from contextlib import contextmanager
 from collections.abc import Iterator
 from typing import Callable
 from importlib import import_module
@@ -10,10 +11,10 @@ from pathlib import Path
 from semtest.benchmarking import BenchmarkMetadata
 from semtest.parser import SemtestContext
 
-from contextlib import contextmanager
 
 @contextmanager
 def inject_test_path(tests_directory: Path) -> Iterator[None]:
+    """Inject test path into sys"""
     sys.path.insert(0, str(tests_directory))
     yield
     sys.path.pop(0)

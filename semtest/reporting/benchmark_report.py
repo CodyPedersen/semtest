@@ -15,7 +15,7 @@ logger = logging.getLogger("semtest")
 class BenchmarkReport:
     """Convert a series of benchmarks into readable output"""
     # TODO: Buld out output option configurations
-    
+
     benchmarks: list[BenchmarkMetadata] = Field(default_factory=list)
 
     def populate(self, benchmarks: list[BenchmarkMetadata]) -> None:

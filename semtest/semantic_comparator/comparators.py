@@ -1,4 +1,5 @@
 """Embedding vector comparison algorithms"""
+# pylint: disable=unnecessary-ellipsis
 from typing import Protocol
 
 import numpy as np
