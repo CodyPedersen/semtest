@@ -6,6 +6,9 @@ from typing import Any, Callable
 
 import numpy as np
 
+from pydantic import Field
+from pydantic.dataclasses import dataclass
+
 from semtest.semantic_comparator import (
     ComparatorBase,
     CosineSimilarity,
@@ -17,28 +20,22 @@ from .metrics import BenchmarkMetadata, SemanticMetrics
 logger = logging.getLogger("semtest")
 
 
+@dataclass
 class BenchmarkRunner:
     """
     Core class to execute a benchmarking run and track results.
     """
+    func: Callable[..., str]
+    semantic_expectation: str
+    iterations: int
+    comparator: ComparatorBase
+    embedding_client: EmbeddingClient = Field(default_factory=EmbeddingClient)
 
-    def __init__(
-        self,
-        func: Callable[..., str],
-        semantic_expectation: str,
-        iterations: int,
-        comparator: ComparatorBase,
-        embedding_client: EmbeddingClient = EmbeddingClient(),
-    ):
-        self.func = func
-        self.semantic_expectation = semantic_expectation
-        self.iterations = iterations
-        self.comparator = comparator
-        self.embedding_client = embedding_client
 
+    def __post_init__(self) -> None:
         self.embedding_expectation = (
             self.embedding_client.generate_embedding_vector(
-                semantic_expectation
+                self.semantic_expectation
             )
         )
 
