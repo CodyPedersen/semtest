@@ -12,6 +12,7 @@ semtest supports the semantic benchmarking process through the following:
 2. Execution of inputs against a given model
 3. Collection of llm responses for the given input
 4. Analysis of embedding vector difference of the llm response and the expectation
+5. Soon - generic comparator implementation
 
 
 ## Core Requirements
@@ -104,7 +105,7 @@ __Caveats:__
 
 ## Ongoing features
 - Implement llm response schema validation via Pydantic
-    - Comparators must be fully generic & non-coupled to embeddings (Embedding Comparator, Schema Comparator, Data match comparator (structured kv)
+    - Comparators must be fully generic & non-coupled to embeddings (Embedding Comparator, Schema Comparator, Data match comparator/structured kv)
 - Fixture support for framework mode
 - Support for multiple result output formats (non-CLI)
 - Allow for parameterization of benchmarks with multiple I/O expectations
