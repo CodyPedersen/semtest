@@ -72,8 +72,9 @@ def mock_prompt_2() -> str | None:
             {
                 "role": "user",
                 "content": (
-                    "Below I'm supplying a list of privileges in json format, from this which are the "
-                    f"most likely administrators\n```json\n{json.dumps(TEST_DATASET)}\n```"
+                    "Below I'm supplying a list of privileges in json "
+                    "format, from this which are the most likely "
+                    f"administrators\n```json\n{json.dumps(TEST_DATASET)}\n```"
                 )
             }
         ]
