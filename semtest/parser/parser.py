@@ -3,6 +3,7 @@
 import argparse
 from pathlib import Path
 from pydantic import BaseModel
+from pydantic.dataclasses import dataclass
 
 from .paramspec import semtest_params
 from .input_type import Verbosity
@@ -15,13 +16,13 @@ class SemtestContext(BaseModel):
     verbosity: Verbosity
 
 
+@dataclass
 class Parser:
     """Base CLI parsing class"""
 
-    def __init__(self) -> None:
-        self.parser = argparse.ArgumentParser(
-            description="semtest: the semantic llm testbench"
-        )
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
+        description="semtest: the semantic llm testbench"
+    )
 
     def parse_arguments(self) -> SemtestContext:
         """Parse CLI arguments and return the resulting object"""
