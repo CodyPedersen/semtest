@@ -7,6 +7,16 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
 
+"""
+TODO: Decouple comparator from embedding implementation.
+Generic comparator should support
+- Schema comparison
+- Data / Ground truth comparison (k/v structured)
+- User-defined comparators (Callables), provided they follow the comparator protocol
+
+Built-ins: Embedding Comparator/Cosine, Schema Comparator, Ground Truth comparator
+"""
+
 class ComparatorBase(Protocol):
     """Base comparator interface"""
 
