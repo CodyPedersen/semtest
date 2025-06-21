@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='semtest',
-    version='0.0.0',
+    version='0.0.1',
     author='Cody Pedersen',
     description='LLM semantic testing and benchmarking framework',
     long_description=(Path(__file__).parent/"README.md").read_text(),
