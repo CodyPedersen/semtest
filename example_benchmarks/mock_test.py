@@ -14,9 +14,13 @@ TEST_DATASET = {
     "Lida": "r"
 }
 
+cosine_similarity = semtest.CosineSimilarity(
+    semantic_expectation=EXPECTATION
+)
+
 # First test picked up and executed by framework mode
 @semtest.benchmark(
-    semantic_expectation=EXPECTATION,
+    comparator=cosine_similarity,
     iterations=2
 )
 def mock_prompt_1() -> str | None:
@@ -51,7 +55,7 @@ def mock_prompt_1() -> str | None:
 
 
 @semtest.benchmark(
-    semantic_expectation=EXPECTATION,
+    comparator=cosine_similarity,
     iterations=2
 )
 def mock_prompt_2() -> str | None:

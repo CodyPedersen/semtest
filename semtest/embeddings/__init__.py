@@ -1,5 +1,6 @@
 """LLM client module"""
 
-from .embeddings import EmbeddingClient
+from .core import EmbeddingClientBase
+from .openai_embeddings import OpenAIEmbeddingClient
 
-__all__ = ["EmbeddingClient"]
+__all__ = ["EmbeddingClientBase", "OpenAIEmbeddingClient"]

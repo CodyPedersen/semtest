@@ -1,35 +1,33 @@
 """Core OpenAI client for LLM interactions"""
-from typing import Optional
+from dataclasses import dataclass
+from functools import cached_property
 
 import openai
 
 from semtest.config import settings
 
 
-class EmbeddingClient():
+@dataclass
+class OpenAIEmbeddingClient:
     """OpenAI embedded model client"""
 
-    def __init__(
-        self,
-        model: str = settings.DEFAULT_EMBEDDING_MODEL,
-        api_key: str = settings.OPENAI_API_KEY,
-        base_url: str = settings.BASE_URL
-    ):
-        self.model = model
-        self.api_key = api_key
-        self.base_url = base_url
-        self.client = openai.OpenAI(
-            api_key=api_key,
-            base_url=base_url
+    model: str = settings.DEFAULT_EMBEDDING_MODEL
+    api_key: str = settings.OPENAI_API_KEY
+    base_url: str = settings.BASE_URL
+
+    @cached_property
+    def client(self) -> openai.OpenAI:
+        """Inner embedding client"""
+        return openai.OpenAI(
+            api_key=self.api_key,
+            base_url=self.base_url,
         )
 
     def generate_embedding_vector(
-        self, input_text: str, model: Optional[str] = None
+        self, input_text: str, model: str | None = None
     ) -> list[float]:
         """Generate embedding vector for a text chunk"""
-
-        if not model:
-            model = self.model
+        model = model or self.model
 
         response = self.client.embeddings.create(
             input=input_text,

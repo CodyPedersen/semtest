@@ -1,7 +1,6 @@
 """Engine specification - see Engine class"""
 import logging
-
-from pydantic.dataclasses import dataclass
+from dataclasses import dataclass
 
 from semtest.benchmarking import BenchmarkMetadata
 from semtest.reporting import BenchmarkReport

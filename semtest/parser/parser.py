@@ -2,8 +2,9 @@
 
 import argparse
 from pathlib import Path
+from dataclasses import dataclass
+
 from pydantic import BaseModel
-from pydantic.dataclasses import dataclass
 
 from .paramspec import semtest_params
 from .input_type import Verbosity

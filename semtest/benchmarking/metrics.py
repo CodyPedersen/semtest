@@ -1,23 +1,25 @@
 """Benchmark metrics and metadata classes"""
 import numpy as np
-from pydantic import BaseModel, Field, computed_field
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    computed_field,
+    field_serializer,
+)
 
 
 class SemanticMetrics(BaseModel):
     """Semantic benchmark metric aggregator"""
     responses: list[str]
     exceptions: list[Exception]
-    result_embeddings: list[list[float]] = Field(
-        ..., exclude=True
-    )
     semantic_distances: list[np.float64]
 
-    class Config:
-        """Semantic metrics configurations"""
-        arbitrary_types_allowed = True
-        json_encoders = {
-            list[Exception]: lambda excs: [type(exc).__name__ for exc in excs]
-        }
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    @field_serializer('exceptions')
+    def serialize_exceptions(self, excs: list[Exception]) -> list[str]:
+        """Serializes exceptions in a compact name format"""
+        return [type(exc).__name__ for exc in excs]
 
     @computed_field
     @property
@@ -37,5 +39,5 @@ class BenchmarkMetadata(BaseModel):
     func: str
     iterations: int
     comparator: str
-    expectation_input: str
+    expectation: str | None
     benchmarks: SemanticMetrics
