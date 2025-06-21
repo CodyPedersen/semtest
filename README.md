@@ -61,7 +61,7 @@ print(res.benchmarks())
 Output
 ```json
 {
-  "func": "mock_prompt_benchmark_prompt",
+  "func": "mock_prompt_benchmark",
   "iterations": 3,
   "comparator": "cosine_similarity",
   "expectation_input": "A dog is in the background of the photograph",
