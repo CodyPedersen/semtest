@@ -1,5 +1,5 @@
 """Embedding vector comparison algorithms"""
-# pylint: disable=unnecessary-ellipsis, pointless-string-statement
+# pylint: disable=unnecessary-ellipsis
 from __future__ import annotations
 from abc import ABC
 from dataclasses import dataclass, field
@@ -9,17 +9,6 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from semtest.embeddings.core import EmbeddingClientBase
 from semtest.embeddings import OpenAIEmbeddingClient
-
-
-"""
-TODO: Decouple comparator from embedding implementation.
-Generic comparator should support
-- Schema comparison
-- Data / Ground truth comparison (k/v structured)
-- User-defined comparators (Callables), provided they follow the comparator protocol
-
-Built-ins: Embedding Comparator/Cosine, Schema Comparator, Ground Truth comparator
-"""
 
 
 @dataclass
