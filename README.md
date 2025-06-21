@@ -34,10 +34,14 @@ Example
 ```python
 import semtest
 
-expected_semantics = "A dog is in the background of the photograph"
 
+cosine_similarity = semtest.CosineSimilarity(
+    semantic_expectation="A dog is in the background of the photograph"
+)
+
+# First test picked up and executed by framework mode
 @semtest.benchmark(
-    semantic_expectation=expected_semantics,
+    comparator=cosine_similarity,
     iterations=3
 )
 def mock_prompt_benchmark():
@@ -57,7 +61,7 @@ print(res.benchmarks())
 Output
 ```json
 {
-  "func": "mock_prompt_benchmark_prompt_2",
+  "func": "mock_prompt_benchmark_prompt",
   "iterations": 3,
   "comparator": "cosine_similarity",
   "expectation_input": "A dog is in the background of the photograph",
@@ -104,8 +108,8 @@ __Caveats:__
 
 
 ## Ongoing features
-- Implement llm response schema validation via Pydantic
-    - Comparators must be fully generic & non-coupled to embeddings (Embedding Comparator, Schema Comparator, Data match comparator/structured kv)
+- Implement flexible comparators:
+  - response schema validation (SchemaValidator) & ground truth k/v validator (GroundTruthValidator)
 - Fixture support for framework mode
 - Support for multiple result output formats (non-CLI)
 - Allow for parameterization of benchmarks with multiple I/O expectations
