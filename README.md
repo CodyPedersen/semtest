@@ -107,8 +107,9 @@ __Caveats:__
 
 
 ## Ongoing features
+- Support for multiple comparators
 - Implement flexible comparators:
-  - response schema validation (SchemaValidator) & ground truth k/v validator (GroundTruthValidator)
+  - response schema validation (SchemaValidator) & ground truth k/v validator (GroundTruthValidator) & llm custom validation (LLMValidator)
 - I/O (input/expectation) parameterization `semtest.parameterized` & multi-comparator evaluation
 - Offload metrics schema & aggregation to Comparators
 - Fixture support for framework mode
