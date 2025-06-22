@@ -2,8 +2,9 @@
 Core comparator interfaces
 
 TODO: Implementation of following comparators:
-- Schema comparison
-- Data / Ground truth comparison (k/v structured)
+- Schema Comparators 
+- Data / Ground truth Comparators (k/v structured)
+- Comparators should own the structure of their resulting metrics & aggregation
 """
 from typing import Protocol, runtime_checkable
 import numpy as np

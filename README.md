@@ -110,6 +110,7 @@ __Caveats:__
 - Implement flexible comparators:
   - response schema validation (SchemaValidator) & ground truth k/v validator (GroundTruthValidator)
 - I/O (input/expectation) parameterization `semtest.parameterized` & multi-comparator evaluation
+- Offload metrics schema & aggregation to Comparators
 - Fixture support for framework mode
 - Support for multiple result output formats (non-CLI)
 - Allow for parameterization of benchmarks with multiple I/O expectations

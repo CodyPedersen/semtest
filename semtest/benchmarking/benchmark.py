@@ -41,7 +41,10 @@ class BenchmarkRunner:
         results: list[str],
         exceptions: list[Exception]
     ) -> BenchmarkMetadata:
-        """Generate core benchmarking metrics"""
+        """
+        Generate core benchmarking metrics
+        TODO: Offload SemanticMetrics to Comparators
+        """
         expectation_input = getattr(
             self.comparator, "semantic_expectation", None
         )
