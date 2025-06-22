@@ -36,8 +36,7 @@ class Engine:
         for benchmark_func in benchmark_fns:
             benchmark_metadata = benchmark_func()
             results.append(benchmark_metadata)
-            benchmark_dump = f"benchmark results: {benchmark_metadata.model_dump_json(indent=2)}\n"
-            logger.info(benchmark_dump)
+            self.reporter.log_interim_benchmark_md(benchmark_metadata)
 
         self.reporter.populate(results)
         self.reporter.report()

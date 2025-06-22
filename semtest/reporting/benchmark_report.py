@@ -18,6 +18,14 @@ class BenchmarkReport:
 
     benchmarks: list[BenchmarkMetadata] = Field(default_factory=list)
 
+    @staticmethod
+    def log_interim_benchmark_md(
+        benchmark_md: BenchmarkMetadata
+    ) -> None:
+        """Preview of benchmark metadata for realtime logging"""
+        benchmark_dump = f"benchmark results: {benchmark_md.model_dump_json(indent=2)}\n"
+        logger.info(benchmark_dump)
+
     def populate(self, benchmarks: list[BenchmarkMetadata]) -> None:
         """Populate reporter with data"""
         self.benchmarks += benchmarks
