@@ -12,7 +12,6 @@ semtest supports the semantic benchmarking process through the following:
 2. Execution of inputs against a given model
 3. Collection of llm responses for the given input
 4. Analysis of embedding vector difference of the llm response and the expectation
-5. Soon - generic comparator implementation
 
 
 ## Core Requirements
@@ -110,6 +109,8 @@ __Caveats:__
 ## Ongoing features
 - Implement flexible comparators:
   - response schema validation (SchemaValidator) & ground truth k/v validator (GroundTruthValidator)
+- I/O (input/expectation) parameterization `semtest.parameterized` & multi-comparator evaluation
 - Fixture support for framework mode
 - Support for multiple result output formats (non-CLI)
 - Allow for parameterization of benchmarks with multiple I/O expectations
+
