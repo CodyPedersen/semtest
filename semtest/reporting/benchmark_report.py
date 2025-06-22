@@ -22,17 +22,22 @@ class BenchmarkReport:
         """Populate reporter with data"""
         self.benchmarks += benchmarks
 
+    def log_exceptions(self) -> None:
+        """Hand-log exceptions"""
+        logger.info(f"{"="*30} Exceptions {"="*30}\n")
+        for benchmark in self.benchmarks:
+            if benchmark.benchmarks.exceptions:
+                logger.info(f"{"="*15} Exceptions: {benchmark.func}  {"="*15}\n")
+                for e_ in benchmark.benchmarks.exceptions:
+                    logger.exception(f"{e_!s}")
+
     def report(self) -> None:
         """Build BenchmarkMetadata objects into a standard report"""
-
+        self.log_exceptions()
         report_df = pd.DataFrame(self._build_row_dicts())
 
-        fmt_token = "="
-        report_header = f"{fmt_token*30} Benchmarking Results {fmt_token*30}\n"
-        logger.info(report_header)
-
+        logger.info(f"{"="*30} Benchmarking Results {"="*30}\n")
         print(tabulate.tabulate(report_df, headers='keys', tablefmt='fancy_grid'))
-
 
     def _build_row_dicts(self) -> list[dict[str, Any]]:
         """Generate row dicts from benchmark metadata"""

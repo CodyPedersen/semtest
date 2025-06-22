@@ -24,13 +24,7 @@ class BenchmarkRunner:
 
     def run(self, *args: Any, **kwargs: Any) -> BenchmarkMetadata:
         """Execute benchmark and generate response embeddings"""
-        fmt_token = '='
-        info = (
-            f"{fmt_token*35} "
-            f"{self.func.__name__} (n={self.iterations} iterations) "
-            f"{fmt_token*35}\n"
-        )
-        logger.info(info)
+        self._log_init()
 
         results, exceptions = [], []
         for _ in range(self.iterations):
@@ -38,10 +32,6 @@ class BenchmarkRunner:
                 res = self.func(*args, **kwargs)
                 results.append(res)
             except Exception as e:
-                logger.info("Exception captured\n")
-                exception_msg = f"{e!r}\n"
-                logger.exception(exception_msg)
-                logger.info("\n")
                 exceptions.append(e)
 
         return self.build_metrics(results, exceptions)
@@ -55,7 +45,7 @@ class BenchmarkRunner:
         expectation_input = getattr(
             self.comparator, "semantic_expectation", None
         )
-        # To implement expectation schema
+        # TODO: Generalize metadata for schema/ground truth
 
         return BenchmarkMetadata(
            func=self.func.__name__,
@@ -70,6 +60,15 @@ class BenchmarkRunner:
                 ]
            )
         )
+
+    def _log_init(self) -> None:
+        fmt_token = '='
+        info = (
+            f"{fmt_token*35} "
+            f"{self.func.__name__} (n={self.iterations} iterations) "
+            f"{fmt_token*35}\n"
+        )
+        logger.info(info)
 
 
 def benchmark(
