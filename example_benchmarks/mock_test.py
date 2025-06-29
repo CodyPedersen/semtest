@@ -28,14 +28,14 @@ def mock_prompt_1() -> str | None:
 
     client = OpenAI()
     llm_response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4.1",
         temperature=0.3,
         messages=[
             {
                 "role": "system",
                 "content": (
                     "You are an expert at examining IT controls and answer questions in a succinct "
-                    "fashion while answering with all required details"
+                    "fashion (ideally in one sentence)"
                 )
             },
             {
@@ -63,14 +63,14 @@ def mock_prompt_2() -> str | None:
 
     client = OpenAI()
     llm_response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4.1",
         temperature=0.3,
         messages=[
             {
                 "role": "system",
                 "content": (
                     "You are an expert at examining IT controls and answer questions in a succinct "
-                    "fashion while answering with all required details"
+                    "fashion (ideally in one sentence)"
                 )
             },
             {
