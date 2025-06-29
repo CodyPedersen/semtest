@@ -47,8 +47,6 @@ class BenchmarkRunner:
         TODO: Offload SemanticMetrics to Comparators
         """
 
-        # TODO: Generalize metadata for schema/ground truth
-
         return BenchmarkMetadata(
            func=self.func.__name__,
            iterations=self.iterations,
