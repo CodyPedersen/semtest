@@ -88,3 +88,13 @@ def mock_prompt_2() -> str | None:
     # additional post-processing
 
     return response_text
+
+
+@semtest.benchmark(
+    comparator=cosine_similarity,
+    iterations=2
+)
+def raises_() -> str:
+    """A slightly worse prompt/temperature/config"""
+
+    raise ValueError("Example ValueError thrown")

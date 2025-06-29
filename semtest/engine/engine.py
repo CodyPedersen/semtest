@@ -3,7 +3,7 @@ import logging
 from dataclasses import dataclass
 
 from semtest.benchmarking import BenchmarkMetadata
-from semtest.reporting import BenchmarkReport
+from semtest.reporting import BenchmarkReport, log_interim_benchmark
 from semtest.loader import Loader
 from semtest.parser import SemtestContext
 
@@ -24,21 +24,14 @@ class Engine:
 
     def execute(self) -> list[BenchmarkMetadata]:
         """Load all tests, execute them and provide results"""
-        begin_load_log = "\nLoading semtest benchmarks...\n"
-        logger.info(begin_load_log)
+        benchmark_funcs = self.loader.load()
 
-        benchmark_fns = self.loader.load()
+        benchmarks = []
+        for benchmark_func in benchmark_funcs:
+            benchmark = benchmark_func()
+            log_interim_benchmark(benchmark)
+            benchmarks.append(benchmark)
 
-        begin_benchmark_log = "Initializing semtest benchmarks...\n"
-        logger.info(begin_benchmark_log)
+        self.reporter.report(benchmarks)
 
-        results: list[BenchmarkMetadata] = []
-        for benchmark_func in benchmark_fns:
-            benchmark_metadata = benchmark_func()
-            results.append(benchmark_metadata)
-            self.reporter.log_interim_benchmark_md(benchmark_metadata)
-
-        self.reporter.populate(results)
-        self.reporter.report()
-
-        return results
+        return benchmarks
