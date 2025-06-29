@@ -13,3 +13,7 @@ import numpy as np
 class ComparatorBase(Protocol):
     """Base comparator interface"""
     def __call__(self, response: str) -> np.float64: ...
+
+    @property
+    def baseline(self) -> str:
+        """Response expectations for reporting"""

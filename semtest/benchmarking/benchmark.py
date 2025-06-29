@@ -46,16 +46,14 @@ class BenchmarkRunner:
         Generate core benchmarking metrics
         TODO: Offload SemanticMetrics to Comparators
         """
-        expectation_input = getattr(
-            self.comparator, "semantic_expectation", None
-        )
+
         # TODO: Generalize metadata for schema/ground truth
 
         return BenchmarkMetadata(
            func=self.func.__name__,
            iterations=self.iterations,
            comparator=str(self.comparator),
-           expectation=expectation_input,
+           expectation=self.comparator.baseline,
            benchmarks=SemanticMetrics(
                 responses=results,
                 exceptions=exceptions,

@@ -26,6 +26,11 @@ class SemanticComparator(ABC):
         embedding_b = self.embedding_client.generate_embedding_vector(response)
         return np.array(embedding_a).reshape(1, -1), np.array(embedding_b).reshape(1, -1)
 
+    @property
+    def baseline(self) -> str:
+        """Response expectations for reporting"""
+        return self.semantic_expectation
+
 
 @dataclass
 class GenericSemanticComparator(SemanticComparator):
