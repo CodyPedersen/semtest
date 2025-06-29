@@ -1,6 +1,7 @@
 """Tools required to build a report from benchmark results"""
 import logging
-from typing import Sequence
+from collections.abc import Callable
+from typing import Any, Sequence
 import pandas as pd
 import tabulate
 
@@ -18,6 +19,16 @@ def log_exceptions(benchmarks: Sequence[BenchmarkMetadata]) -> None:
             logger.info(f"{'='*15} Exceptions: {benchmark.func}  {'='*15}\n")
             for e_ in benchmark.benchmarks.exceptions:
                 logger.exception(f"{e_!s}")
+
+
+def log_benchmark_init(func: Callable[..., Any], iterations: int) -> None:
+    """Default benchmark init logging"""
+    info = (
+        f"{"="*35} "
+        f"{func.__name__} (n={iterations} iterations) "
+        f"{"="*35}\n"
+    )
+    logger.info(info)
 
 
 def log_interim_benchmark(benchmark_md: BenchmarkMetadata) -> None:

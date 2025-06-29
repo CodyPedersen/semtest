@@ -1,6 +1,5 @@
 """Tools required to build a report from benchmark results"""
 from typing import Sequence
-import pandas as pd
 
 from semtest.benchmarking.metrics import BenchmarkMetadata
 

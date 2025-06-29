@@ -8,7 +8,9 @@ from dataclasses import dataclass
 from semtest.comparator import (
     ComparatorBase,
 )
+from semtest.reporting import log_benchmark_init
 from .metrics import BenchmarkMetadata, SemanticMetrics
+
 
 logger = logging.getLogger("semtest")
 
@@ -24,7 +26,6 @@ class BenchmarkRunner:
 
     def run(self, *args: Any, **kwargs: Any) -> BenchmarkMetadata:
         """Execute benchmark and generate response embeddings"""
-        self._log_init()
 
         results, exceptions = [], []
         for _ in range(self.iterations):
@@ -64,15 +65,6 @@ class BenchmarkRunner:
            )
         )
 
-    def _log_init(self) -> None:
-        fmt_token = '='
-        info = (
-            f"{fmt_token*35} "
-            f"{self.func.__name__} (n={self.iterations} iterations) "
-            f"{fmt_token*35}\n"
-        )
-        logger.info(info)
-
 
 def benchmark(
     comparator: ComparatorBase,
@@ -89,6 +81,7 @@ def benchmark(
 
         @wraps(func)
         def inner(*args: Any, **kwargs: Any) -> BenchmarkMetadata:
+            log_benchmark_init(func, iterations)  # TODO: Move to outer scope
             return benchmark_runner.run(*args, **kwargs)
 
         setattr(inner, "_benchmark", True)  # Mark function as a benchmark
