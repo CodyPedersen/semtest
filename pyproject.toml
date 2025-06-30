@@ -40,6 +40,9 @@ exclude = [
     "__pycache__/",
 ]
 
+[project.scripts]
+semtest = "semtest:semantic_test_runner"
+
 [tool.pyright]
 include = ["example_benchmarks"]
 extraPaths = ["./example_benchmarks"]
