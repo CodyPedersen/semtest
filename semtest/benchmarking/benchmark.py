@@ -9,6 +9,7 @@ from semtest.comparator import (
     ComparatorBase,
 )
 from semtest.reporting import log_benchmark_init
+from .core import BenchmarkRunnerBase
 from .metrics import BenchmarkMetadata, SemanticMetrics
 
 
@@ -65,11 +66,12 @@ class BenchmarkRunner:
 def benchmark(
     comparator: ComparatorBase,
     iterations: int = 1,
+    benchmark_runner_cls: type[BenchmarkRunnerBase] = BenchmarkRunner
 ) -> Callable[[Callable[..., Any]], Callable[..., BenchmarkMetadata]]:
     """Generate and execute a benchmark client test"""
 
     def decorator(func: Callable[..., Any]) -> Callable[..., BenchmarkMetadata]:
-        benchmark_runner = BenchmarkRunner(
+        benchmark_runner = benchmark_runner_cls(
             func=func,
             iterations=iterations,
             comparator=comparator,

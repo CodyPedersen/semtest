@@ -9,6 +9,7 @@ from semtest.parser import SemtestContext
 
 logger = logging.getLogger("semtest")
 
+
 @dataclass
 class Engine:
     """
@@ -35,3 +36,4 @@ class Engine:
         self.reporter.report(benchmarks)
 
         return benchmarks
+
