@@ -69,18 +69,11 @@ def mock_prompt_2() -> str | None:
         messages=[
             {
                 "role": "system",
-                "content": (
-                    "You are an expert at examining IT controls and answer questions in a succinct "
-                    "fashion (ideally in one sentence)"
-                )
+                "content": TEST_SYSTEM_PROMPT
             },
             {
                 "role": "user",
-                "content": (
-                    "Below I'm supplying a list of privileges in json "
-                    "format, from this which are the most likely "
-                    f"administrators\n```json\n{json.dumps(TEST_DATASET)}\n```"
-                )
+                "content": TEST_USER_PROMPT.format(sample_data=json.dumps(TEST_DATASET))
             }
         ]
     )
@@ -96,6 +89,6 @@ def mock_prompt_2() -> str | None:
     iterations=2
 )
 def raises_() -> str:
-    """A slightly worse prompt/temperature/config"""
+    """Intentionally raises"""
 
     raise ValueError("Example ValueError thrown")
