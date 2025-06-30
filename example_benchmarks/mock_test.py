@@ -65,7 +65,7 @@ def mock_prompt_2() -> str | None:
     client = OpenAI()
     llm_response = client.chat.completions.create(
         model="gpt-4.1",
-        temperature=0.3,
+        temperature=0.99,
         messages=[
             {
                 "role": "system",
