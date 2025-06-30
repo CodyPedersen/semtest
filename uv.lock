@@ -494,7 +494,7 @@ wheels = [
 
 [[package]]
 name = "openai"
-version = "1.44.0"
+version = "1.93.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
@@ -506,9 +506,9 @@ dependencies = [
     { name = "tqdm" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ba/9b/946d67085cba123ab48198610d962d73d0c301b3771f21af7791eb07df93/openai-1.44.0.tar.gz", hash = "sha256:acde74598976ec85bc477e9abb94eeb17f6efd998914d5685eeb46a69116894a", size = 292563 }
+sdist = { url = "https://files.pythonhosted.org/packages/e4/d7/e91c6a9cf71726420cddf539852ee4c29176ebb716a702d9118d0409fd8e/openai-1.93.0.tar.gz", hash = "sha256:988f31ade95e1ff0585af11cc5a64510225e4f5cd392698c675d0a9265b8e337", size = 486573 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/99/ae/e8fb328fc0fc20ae935950b1f7160de8e2631a5997c2398c9b8a8cc502f8/openai-1.44.0-py3-none-any.whl", hash = "sha256:99a12bbda15f9c632ee911851e101669a82ee34992fbfd658a9db27d90dc0a9c", size = 367790 },
+    { url = "https://files.pythonhosted.org/packages/64/46/a10d9df4673df56f71201d129ba1cb19eaff3366d08c8664d61a7df52e65/openai-1.93.0-py3-none-any.whl", hash = "sha256:3d746fe5498f0dd72e0d9ab706f26c91c0f646bf7459e5629af8ba7c9dbdf090", size = 755038 },
 ]
 
 [[package]]
@@ -908,6 +908,7 @@ name = "semtest"
 version = "0.0.1"
 source = { editable = "." }
 dependencies = [
+    { name = "httpx" },
     { name = "mypy" },
     { name = "numpy" },
     { name = "openai" },
@@ -930,9 +931,10 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "httpx", specifier = ">=0.28.1" },
     { name = "mypy", specifier = ">=1.16.1" },
     { name = "numpy", specifier = "==2.1.1" },
-    { name = "openai", specifier = "==1.44.0" },
+    { name = "openai", specifier = ">=1.93.0" },
     { name = "pandas", specifier = "==2.2.2" },
     { name = "pydantic", specifier = "==2.9.0" },
     { name = "pydantic-settings", specifier = "==2.4.0" },
