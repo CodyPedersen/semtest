@@ -14,24 +14,21 @@ class Verbosity(str, Enum):
     EXCEPTION = "exception"
 
 
-class InputType:
-    """Bucket for input validation/conversion"""
+# Input validation bucket
+def directory(value: str) -> Path:
+    """Validate input directory"""
+    if not os.path.isdir(value):
+        exc = f"{value} is not a valid directory"
+        raise argparse.ArgumentTypeError(exc)
 
-    @staticmethod
-    def directory(value: str) -> Path:
-        """Validate input directory"""
-        if not os.path.isdir(value):
-            exc = f"{value} is not a valid directory"
-            raise argparse.ArgumentTypeError(exc)
+    return Path(value)
 
-        return Path(value)
 
-    @staticmethod
-    def verbosity(value: str) -> Verbosity:
-        """Verbosity validaiton"""
-        verbosity_options = Verbosity.__members__.values()
-        if value.lower() not in verbosity_options:
-            exc = f"{value} not a valid verbosity level. Valid values: {verbosity_options}"
-            raise argparse.ArgumentTypeError(exc)
+def verbosity(value: str) -> Verbosity:
+    """Verbosity validaiton"""
+    verbosity_options = Verbosity.__members__.values()
+    if value.lower() not in verbosity_options:
+        exc = f"{value} not a valid verbosity level. Valid values: {verbosity_options}"
+        raise argparse.ArgumentTypeError(exc)
 
-        return Verbosity(value)
+    return Verbosity(value)
