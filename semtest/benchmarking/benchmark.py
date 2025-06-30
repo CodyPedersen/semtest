@@ -1,6 +1,5 @@
 """Core benchmarking functionality"""
 # pylint: disable=broad-exception-caught
-import logging
 from functools import wraps
 from typing import Any, Callable
 from dataclasses import dataclass
@@ -11,9 +10,6 @@ from semtest.comparator import (
 from semtest.reporting import log_benchmark_init
 from .core import BenchmarkRunnerBase
 from .metrics import BenchmarkMetadata, SemanticMetrics
-
-
-logger = logging.getLogger("semtest")
 
 
 @dataclass

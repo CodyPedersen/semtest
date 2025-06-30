@@ -1,13 +1,10 @@
 """Engine specification - see Engine class"""
-import logging
 from dataclasses import dataclass
 
 from semtest.benchmarking import BenchmarkMetadata
 from semtest.reporting import BenchmarkReport, log_interim_benchmark
 from semtest.loader import Loader
 from semtest.parser import SemtestContext
-
-logger = logging.getLogger("semtest")
 
 
 @dataclass
