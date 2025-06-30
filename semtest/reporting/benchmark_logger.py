@@ -11,12 +11,14 @@ from .models import BenchmarkReportRow
 
 logger = logging.getLogger("semtest")
 
+FMT_TOKEN = "="
+
 def log_exceptions(benchmarks: Sequence[BenchmarkMetadata]) -> None:
     """Log exceptions from benchmarks"""
-    logger.info(f"{'='*30} Exceptions {'='*30}\n")
+    logger.info(f"{FMT_TOKEN*30} Exceptions {FMT_TOKEN*30}\n")
     for benchmark in benchmarks:
         if benchmark.benchmarks.exceptions:
-            logger.info(f"{'='*15} Exceptions: {benchmark.func}  {'='*15}\n")
+            logger.info(f"{FMT_TOKEN*15} Exceptions: {benchmark.func}  {FMT_TOKEN*15}\n")
             for e_ in benchmark.benchmarks.exceptions:
                 logger.exception(f"{e_!s}")
 
@@ -24,9 +26,9 @@ def log_exceptions(benchmarks: Sequence[BenchmarkMetadata]) -> None:
 def log_benchmark_init(func: Callable[..., Any], iterations: int) -> None:
     """Default benchmark init logging"""
     info = (
-        f"{"="*35} "
+        f"{FMT_TOKEN*35} "
         f"{func.__name__} (n={iterations} iterations) "
-        f"{"="*35}\n"
+        f"{FMT_TOKEN*35}\n"
     )
     logger.info(info)
 
@@ -39,7 +41,7 @@ def log_interim_benchmark(benchmark_md: BenchmarkMetadata) -> None:
 
 def log_results_as_table(benchmarks: Sequence[BenchmarkReportRow]) -> None:
     """Log the formatted results table"""
-    logger.info(f"{'='*30} Benchmarking Results {'='*30}\n")
+    logger.info(f"{FMT_TOKEN*30} Benchmarking Results {FMT_TOKEN*30}\n")
     benchmark_dicts = [
         benchmark.model_dump()
         for benchmark in benchmarks

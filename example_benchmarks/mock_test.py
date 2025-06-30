@@ -1,7 +1,13 @@
 """Mock tests for framework mode to pick up."""
 import json
 from openai import OpenAI
+
 import semtest
+
+from example_benchmarks.external_prompt import (
+    TEST_SYSTEM_PROMPT,
+    TEST_USER_PROMPT,
+)
 
 
 EXPECTATION = "Harold and Antonio are the likey administrators as they both have 'rwx' privileges"
@@ -13,6 +19,7 @@ TEST_DATASET = {
     "Liefeng": "r",
     "Lida": "r"
 }
+
 
 cosine_similarity = semtest.CosineSimilarity(
     semantic_expectation=EXPECTATION
@@ -33,17 +40,11 @@ def mock_prompt_1() -> str | None:
         messages=[
             {
                 "role": "system",
-                "content": (
-                    "You are an expert at examining IT controls and answer questions in a succinct "
-                    "fashion (ideally in one sentence)"
-                )
+                "content": TEST_SYSTEM_PROMPT
             },
             {
                 "role": "user",
-                "content": (
-                    "Based on the following dataset of folder privileges, who are the most "
-                    f"likely administrators\n```json\n{json.dumps(TEST_DATASET)}\n```"
-                )
+                "content": TEST_USER_PROMPT.format(sample_data=json.dumps(TEST_DATASET))
             }
         ]
     )
