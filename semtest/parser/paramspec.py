@@ -1,5 +1,5 @@
 """Core arguments for semtest"""
-from typing import Any, Optional, Callable
+from typing import Any, Callable
 from pydantic import BaseModel
 
 from .input_type import Verbosity, directory, verbosity
@@ -10,8 +10,8 @@ class SemtestParamSpec(BaseModel):
     flag: str
     type: type | Callable[..., Any]
     help: str
-    default: Optional[str] = None
-    required: Optional[bool] = None
+    default: str | None = None
+    required: bool | None = None
 
 
 semtest_params = [
