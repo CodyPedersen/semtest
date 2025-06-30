@@ -33,5 +33,5 @@ def test_cosine_similarity(
         embedding_client=no_op_embedding_client
     )
     cos = cosine_similarity_cmp(response="mock llm response")
-    
+
     assert np.isclose(cos, 1.0)  # due to nature of the fake, these are identical
