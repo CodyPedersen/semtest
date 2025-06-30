@@ -2,7 +2,7 @@
 from .benchmarking import BenchmarkMetadata, BenchmarkRunner, benchmark
 from .embeddings import EmbeddingClientBase, OpenAIEmbeddingClient
 from .comparator import CosineSimilarity
-from .semtest import semantic_test_runner
+from .semtest import semantic_test_runner, semtest_configure_run
 
 __all__ = [
     "BenchmarkMetadata",
@@ -11,5 +11,6 @@ __all__ = [
     "EmbeddingClientBase",
     "OpenAIEmbeddingClient",
     "benchmark",
-    "semantic_test_runner"
+    "semantic_test_runner",
+    "semtest_configure_run"
 ]

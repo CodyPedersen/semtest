@@ -1,8 +1,6 @@
 """module entrypoint for trivial execution"""
 
-from .semtest import semantic_test_runner
-from .logcfg import configure_cli_logging
+from .semtest import semtest_configure_run
 
 if __name__ == '__main__':
-    configure_cli_logging()
-    semantic_test_runner()
+    semtest_configure_run()

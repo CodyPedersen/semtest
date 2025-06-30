@@ -41,7 +41,7 @@ exclude = [
 ]
 
 [project.scripts]
-semtest = "semtest:semantic_test_runner"
+semtest = "semtest:semtest_configure_run"
 
 [tool.pyright]
 include = ["example_benchmarks"]
