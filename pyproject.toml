@@ -52,8 +52,8 @@ ignore_missing_imports = true
 plugins=["pydantic.mypy"]
 
 [tool.pylint.master]
-load-plugins = ["pylint_pytest"]
 py-version = "3.12"
+load-plugins = ["pylint_pytest"]
 
 [tool.pylint."messages control"]
 disable = [
