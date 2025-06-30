@@ -1,6 +1,6 @@
 from typing import Iterator
-import pytest
 from unittest.mock import patch, MagicMock
+import pytest
 
 from semtest.comparator import ComparatorBase
 from semtest.embeddings import EmbeddingClientBase
