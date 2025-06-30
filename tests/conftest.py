@@ -1,7 +1,10 @@
+from typing import Iterator
 import pytest
+from unittest.mock import patch, MagicMock
 
 from semtest.comparator import ComparatorBase
 from semtest.embeddings import EmbeddingClientBase
+
 
 from .fakes import NoOpSemanticComparator, NoOpEmbeddingClient
 
@@ -23,3 +26,10 @@ def no_op_comparator(
 @pytest.fixture(scope="module")
 def no_op_embedding_client() -> EmbeddingClientBase:
     return NoOpEmbeddingClient()
+
+
+@pytest.fixture(autouse=True)
+def mock_settings_fixture() -> Iterator[None]:
+    """Unfortunate uniform mock"""
+    with patch('semtest.config.settings', MagicMock()):
+        yield
