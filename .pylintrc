@@ -82,7 +82,7 @@ limit-inference-results=100
 
 # List of plugins (as comma separated values of python module names) to load,
 # usually to register additional checkers.
-load-plugins=
+load-plugins=pylint_pytest
 
 # Pickle collected data for later comparisons.
 persistent=yes
@@ -441,7 +441,10 @@ disable=raw-checker-failed,
         fixme,
         too-many-instance-attributes,
         too-many-arguments,
-        logging-fstring-interpolation
+        logging-fstring-interpolation,
+        missing-module-docstring,
+        missing-function-docstring,
+        missing-class-docstring
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option

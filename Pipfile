@@ -18,6 +18,8 @@ termcolor = "==2.4.0"
 
 [dev-packages]
 pydantic = {version = "2.9.0", extras = ["mypy"]}
+pylint-pytest="*"
 ipykernel= "==6.29.5"
+pytest = "*"
 pylint = "*"
 mypy = "*"
