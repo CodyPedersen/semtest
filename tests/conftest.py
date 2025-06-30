@@ -27,9 +27,3 @@ def no_op_comparator(
 def no_op_embedding_client() -> EmbeddingClientBase:
     return NoOpEmbeddingClient()
 
-
-@pytest.fixture(autouse=True)
-def mock_settings_fixture() -> Iterator[None]:
-    """Unfortunate uniform mock"""
-    with patch('semtest.config.settings', MagicMock()):
-        yield

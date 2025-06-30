@@ -36,4 +36,3 @@ class Engine:
         self.reporter.report(benchmarks)
 
         return benchmarks
-
