@@ -1,5 +1,3 @@
-from typing import Iterator
-from unittest.mock import patch, MagicMock
 import pytest
 
 from semtest.comparator import ComparatorBase
@@ -26,4 +24,3 @@ def no_op_comparator(
 @pytest.fixture(scope="module")
 def no_op_embedding_client() -> EmbeddingClientBase:
     return NoOpEmbeddingClient()
-
